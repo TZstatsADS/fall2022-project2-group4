@@ -5,6 +5,7 @@ import os
 from typing import Dict, Iterable, Any
 import pandas as pd
 import csv
+from copy import deepcopy
 
 _CONFIG: Dict = None
 _CLIENT: sodapy.Socrata = None
@@ -83,26 +84,26 @@ def download_datasets(**kwargs) -> None:
 
 
 def _parse_options(options, **kwargs) -> Dict:
-
+    new_options = deepcopy(options)
     for name, value in kwargs.items():
-        new_value = value
+        new_value = deepcopy(value)
 
         # Check if the value is iterable
         if isinstance(new_value, list):
             new_value = ",".join(new_value)
 
-        options[name] = new_value
+        new_options[name] = new_value
 
-    for name, value in options.items():
-        new_value = value
+    for name, value in new_options.items():
+        new_value = deepcopy(value)
 
         # Check if the value is iterable
         if isinstance(new_value, list):
             new_value = ",".join(new_value)
 
-        options[name] = new_value
+        new_options[name] = new_value
 
-    return options
+    return new_options
 
 
 def _download_dataset(
@@ -172,11 +173,13 @@ def _file_is_writable(filepath: str) -> bool:
     """
     if os.path.exists(filepath):
         response = input(f"The file already exists. "
-                         "Do you want to overwrite the file? (yes/no)")
-        response = response.strip()
-        if response.lower() == "no":
+                        "Do you want to overwrite the file? (yes/no)")
+        response = response.strip().lower()
+        if response == "no":
             print("File not overwritten!")
             return False
+        elif response == "":
+            print("Download cancelled")
 
     return True
 
