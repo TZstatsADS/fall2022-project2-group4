@@ -15,6 +15,7 @@ datasets:
         - "crash_time"
         - "borough"
         - "zip_code"
+        - "longitude"
         - "latitude"
         - "on_street_name"
         - "number_of_persons_injured"
