@@ -57,7 +57,7 @@ def download_datasets(**kwargs) -> None:
         identifier: str = values["identifier"]
         content_type: str = values["content_type"]
 
-        options : str = _parse_options(
+        options: str = _parse_options(
             values["options"],
             **kwargs
         )
@@ -81,6 +81,7 @@ def download_datasets(**kwargs) -> None:
         # Save the file to the data directory
         _write_file(filepath, raw_data, content_type)
 
+
 def _parse_options(options, **kwargs) -> Dict:
 
     for name, value in kwargs.items():
@@ -94,7 +95,7 @@ def _parse_options(options, **kwargs) -> Dict:
 
     for name, value in options.items():
         new_value = value
-        
+
         # Check if the value is iterable
         if isinstance(new_value, list):
             new_value = ",".join(new_value)
@@ -152,7 +153,7 @@ def _write_file(filepath: str, data: Iterable, content_type: str) -> None:
 
     with open(filepath, "w", newline='', encoding="utf-8") as f:
         if content_type == "csv":
-            writer = csv.writer(f, dialect = 'excel')
+            writer = csv.writer(f, dialect='excel')
             writer.writerows(data)
 
         elif content_type == "json":
