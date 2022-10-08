@@ -33,7 +33,7 @@ def read_config(filepath: str = None) -> Dict:
         _CONFIG = yaml.safe_load(f)
 
 
-def download_datasets(options: Dict = None) -> None:
+def download_datasets(**kwargs) -> None:
     """
     Download the datasets specified in the 
     config.yaml file.
@@ -57,6 +57,10 @@ def download_datasets(options: Dict = None) -> None:
         identifier: str = values["identifier"]
         content_type: str = values["content_type"]
 
+        options : str = _parse_options(
+            values["options"],
+            **kwargs
+        )
         name = name.replace(" ", "_").lower()
 
         filename: str = f"{name}.{content_type}"
@@ -76,6 +80,28 @@ def download_datasets(options: Dict = None) -> None:
 
         # Save the file to the data directory
         _write_file(filepath, raw_data, content_type)
+
+def _parse_options(options, **kwargs) -> Dict:
+
+    for name, value in kwargs.items():
+        new_value = value
+
+        # Check if the value is iterable
+        if isinstance(new_value, list):
+            new_value = ",".join(new_value)
+
+        options[name] = new_value
+
+    for name, value in options.items():
+        new_value = value
+        
+        # Check if the value is iterable
+        if isinstance(new_value, list):
+            new_value = ",".join(new_value)
+
+        options[name] = new_value
+
+    return options
 
 
 def _download_dataset(
@@ -103,7 +129,7 @@ def _download_dataset(
 
     # Get the method for downloading the data
     get_data = _CLIENT.get_all
-    if options:
+    if "limit" in options:
         get_data = _CLIENT.get
 
     # Start download from client
