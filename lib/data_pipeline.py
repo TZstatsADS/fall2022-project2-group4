@@ -179,7 +179,7 @@ def _file_is_writable(filepath: str) -> bool:
             print("File not overwritten!")
             return False
         elif response == "":
-            print("Download cancelled")
+            return False
 
     return True
 
