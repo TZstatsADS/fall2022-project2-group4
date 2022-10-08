@@ -1,0 +1,23 @@
+crash_date,crash_time,borough,zip_code,latitude,longitude,location,on_street_name,off_street_name,cross_street_name,number_of_persons_injured,number_of_persons_killed,number_of_pedestrians_injured,number_of_pedestrians_killed,number_of_cyclist_injured,number_of_cyclist_killed,number_of_motorist_injured,number_of_motorist_killed,contributing_factor_vehicle_1,contributing_factor_vehicle_2,contributing_factor_vehicle_3,contributing_factor_vehicle_4,contributing_factor_vehicle_5,collision_id,vehicle_type_code1,vehicle_type_code2,vehicle_type_code_3,vehicle_type_code_4,vehicle_type_code_5
+2021-09-11T00:00:00.000,2:39,,,,,,WHITESTONE EXPRESSWAY,20 AVENUE,,2,0,0,0,0,0,2,0,Aggressive Driving/Road Rage,Unspecified,,,,4455765,Sedan,Sedan,,,
+2022-03-26T00:00:00.000,11:45,,,,,,QUEENSBORO BRIDGE UPPER,,,1,0,0,0,0,0,1,0,Pavement Slippery,,,,,4513547,Sedan,,,,
+2022-06-29T00:00:00.000,6:55,,,,,,THROGS NECK BRIDGE,,,0,0,0,0,0,0,0,0,Following Too Closely,Unspecified,,,,4541903,Sedan,Pick-up Truck,,,
+2021-09-11T00:00:00.000,9:35,BROOKLYN,11208,40.667202,-73.8665,"
+,  
+(40.667202, -73.8665)",,,1211      LORING AVENUE,0,0,0,0,0,0,0,0,Unspecified,,,,,4456314,Sedan,,,,
+2021-12-14T00:00:00.000,8:13,BROOKLYN,11233,40.683304,-73.917274,"
+,  
+(40.683304, -73.917274)",SARATOGA AVENUE,DECATUR STREET,,0,0,0,0,0,0,0,0,,,,,,4486609,,,,,
+2021-04-14T00:00:00.000,12:47,,,,,,MAJOR DEEGAN EXPRESSWAY RAMP,,,0,0,0,0,0,0,0,0,Unspecified,Unspecified,,,,4407458,Dump,Sedan,,,
+2021-12-14T00:00:00.000,17:05,,,40.709183,-73.956825,"
+,  
+(40.709183, -73.956825)",BROOKLYN QUEENS EXPRESSWAY,,,0,0,0,0,0,0,0,0,Passing Too Closely,Unspecified,,,,4486555,Sedan,Tractor Truck Diesel,,,
+2021-12-14T00:00:00.000,8:17,BRONX,10475,40.86816,-73.83148,"
+,  
+(40.86816, -73.83148)",,,344       BAYCHESTER AVENUE,2,0,0,0,0,0,2,0,Unspecified,Unspecified,,,,4486660,Sedan,Sedan,,,
+2021-12-14T00:00:00.000,21:10,BROOKLYN,11207,40.67172,-73.8971,"
+,  
+(40.67172, -73.8971)",,,2047      PITKIN AVENUE,0,0,0,0,0,0,0,0,Driver Inexperience,Unspecified,,,,4487074,Sedan,,,,
+2021-12-14T00:00:00.000,14:58,MANHATTAN,10017,40.75144,-73.97397,"
+,  
+(40.75144, -73.97397)",3 AVENUE,EAST 43 STREET,,0,0,0,0,0,0,0,0,Passing Too Closely,Unspecified,,,,4486519,Sedan,Station Wagon/Sport Utility Vehicle,,,
