@@ -1,7 +1,6 @@
 source("./app/dependencies.R")
 
-
-map_data <-
+# Map panel UI code
 
 panel_name <- "Map"
 map_panel_ui <- tabPanel(
@@ -28,11 +27,31 @@ map_panel_ui <- tabPanel(
         ), # end of sidebar panel
 
         mainPanel(
-            plotOutput("map_output")
+            leafletOutput("map_output")
         )
     )
 )
 
-map_panel_server <- renderLeaflet({
+# Map panel server code
 
-})
+# TODO: define map data
+map_data <- NULL
+leaflet_map <- leaflet(
+    map_data,
+    options = leafletOptions(
+        minZoom = 11,
+        maxZoom = 13
+    )
+) %>%
+addTiles() %>%
+addProviderTiles(
+    "CartoDB.Positron",
+    options = providerTileOptions(
+        noWrap = TRUE
+    )
+) %>%
+setView(
+    lng = -73.9834,
+    lat = 40.7504,
+    zoom = 12
+)

@@ -19,3 +19,8 @@ if (!require("leaflet.extras")) {
   install.packages("leaflet.extras")
   library(leaflet.extras)
 }
+
+if (!require("DT")) {
+  install.packages("DT")
+  library(DT)
+}
