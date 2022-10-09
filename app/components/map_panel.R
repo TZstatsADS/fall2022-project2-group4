@@ -1,5 +1,8 @@
 source("./app/dependencies.R")
 
+
+map_data <-
+
 panel_name <- "Map"
 map_panel_ui <- tabPanel(
     panel_name,
@@ -29,3 +32,7 @@ map_panel_ui <- tabPanel(
         )
     )
 )
+
+map_panel_server <- renderLeaflet({
+
+})
