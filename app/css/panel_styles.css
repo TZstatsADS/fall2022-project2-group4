@@ -1,0 +1,10 @@
+#map_time_control {
+    opacity: 0.60;
+    filter: alpha(opacity=60);
+    transition:opacity 1s;
+}
+
+#map_time_control:hover{
+    opacity: 0.90;
+    filter: alpha(opacity=90);
+}

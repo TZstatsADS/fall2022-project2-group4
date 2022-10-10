@@ -5,4 +5,5 @@ server <- function(input, output) {
     output$map_output <- renderLeaflet({
         leaflet_map
     })
+    output$map_label_boroughs <- map_borough_label(input)
 }

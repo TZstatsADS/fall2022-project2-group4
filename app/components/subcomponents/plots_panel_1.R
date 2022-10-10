@@ -1,0 +1,29 @@
+plots_panel_1 <- tabPanel(
+    "Graphs 1",
+    verticalLayout(
+        fluidRow(
+            plotOutput(
+                "plot_volume_1"
+            ),
+            plotOutput(
+                "plot_no_collisions_1"
+            ),
+        ),
+        fluidRow(
+            plotOutput(
+                "plot_total_injuries_1"
+            ),
+            plotOutput(
+                "plot_total_deaths_1"
+            ),
+        ),
+        fluidRow(
+            plotOutput(
+                "plot_injuries_per_collision_1"
+            ),
+            plotOutput(
+                "plot_death_per_collision_1"
+            ),
+        ),
+    )
+)
