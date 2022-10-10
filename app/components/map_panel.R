@@ -16,7 +16,7 @@ map_panel_ui <- tabPanel(
         )
     ), # end of map output fluidRow
     absolutePanel(
-        id = "map_options_control", class = "panel panel-default",
+        id = "map_options_control", class = "panel panel-default custom-panel",
         fixed = TRUE, draggable = TRUE,
         top = 200, left = 50,
         right = "auto", bottom = "auto",
@@ -50,13 +50,12 @@ map_panel_ui <- tabPanel(
             inline = TRUE,
             status = "danger",
             fill = TRUE
-        ),
-        style = "opacity: 0.80"
+        )
     ), # end of absolute panel panel
     absolutePanel(
-        id = "map_time_control", class = "panel panel-default",
-        fixed = TRUE,
-        top = 100, left = 1100,
+        id = "map_time_control", class = "panel panel-default custom-panel",
+        fixed = FALSE,
+        top = 100, left = 1500,
         right = "auto", bottom = "auto",
         width = 400, height = "auto",
         fluidRow(
