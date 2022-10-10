@@ -7,7 +7,7 @@ source("./app/components/map_panel.R")
 source("./app/components/graphs_panel.R")
 
 ui <- fluidPage(
-  theme = shinytheme("journal"),
+  theme = shinytheme("simplex"),
   title = "Group 4 Project", # TODO: change this name
   navbarPage(
     a(

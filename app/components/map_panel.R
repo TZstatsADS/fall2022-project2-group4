@@ -8,6 +8,7 @@ panel_name <- "Map"
 panel_height <- 20
 map_panel_ui <- tabPanel(
     panel_name,
+    icon = icon("map-marker-alt"),
     fluidRow(
         leafletOutput(
             "map_output",
