@@ -1,4 +1,4 @@
-#Project 2: Shiny App Development
+# Project 2: Shiny App Development
 
 ### Data folder
 

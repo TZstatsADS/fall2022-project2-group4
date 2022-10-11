@@ -8,11 +8,11 @@ source("./app/components/graphs_panel.R")
 
 ui <- fluidPage(
   theme = shinytheme("simplex"),
-  title = "Group 4 Project", # TODO: change this name
+  title = "NYC Vehicle Collision Analysis from 2019 to Present", # TODO: change this name
   navbarPage(
     a(
       href = repository_url,
-      "Group 4 Project"
+      "NYC Vehicle Collision Analysis from 2019 to Present"
     ),
     map_panel_ui,
     graphs_panel_ui,

@@ -5,4 +5,6 @@ The App directory contains the app files for the Shiny App (i.e., ui.R and serve
  - ui.R and server.R are two key components for the Shiny App 
  - dependencies.R installs the packages required for running the Shiny App
  - global.R runs the Shiny app
+ - definitions.R defines Shiny App variables
  - /components directory contains the Shiny App panels
+ - /css directory contains Shiny App styles
