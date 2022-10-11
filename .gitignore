@@ -1,3 +1,5 @@
 ./.venv
 *.pyc
 .vscode/settings.json
+output/Traffic_Speed_2019_onwards.zip
+output/Traffic_Volume_2019_onwards.csv
