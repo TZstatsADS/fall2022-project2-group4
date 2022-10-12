@@ -42,4 +42,4 @@ proj/
 
 Please see each subfolder for a README file.
 
-Note: requirements.txt contains all the python packages and versions necessary for this project.
+Note: global.R contains the code for running the Shiny App
