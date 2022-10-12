@@ -101,7 +101,8 @@ get_plots_2 <- function(input, plot_name) {
             group_by(date = lubridate::floor_date(date, "month")) %>%
             summarise(volume = sum(total)) %>%
             ggplot(aes(x = date, y = volume)) +
-            geom_line()
+            geom_line() +
+            labs(title="Traffic Volume by Date",x="Date",y="Volume")
     }
 
     else {
@@ -124,7 +125,8 @@ get_plots_2 <- function(input, plot_name) {
                     total_accidents = sum(total_accidents)
                 ) %>%
                 ggplot(aes(x = date, y = total_accidents)) +
-                geom_line()
+                geom_line() +
+                labs(title="Total Number of Accidents by Date",x="Date",y="Number of Accidents")
         }
 
         if (plot_name == "plot_total_injuries_2") {
@@ -140,7 +142,8 @@ get_plots_2 <- function(input, plot_name) {
                     )
                 ) %>%
                 ggplot(aes(x = date, y = total_injured)) +
-                geom_line()
+                geom_line() +
+                labs(title="Total Persons Injured by Date",x="Date",y="Persons Injured")
         }
 
         if (plot_name == "plot_total_deaths_2") {
@@ -156,7 +159,8 @@ get_plots_2 <- function(input, plot_name) {
                     )
                 ) %>%
                 ggplot(aes(x = date, y = total_killed)) +
-                geom_line()
+                geom_line() +
+                labs(title="Total Persons Killed by Date",x="Date",y="Persons Killed")
         }
 
         if (plot_name == "plot_injuries_per_collision_2") {
@@ -172,7 +176,8 @@ get_plots_2 <- function(input, plot_name) {
                     ) / sum(total_accidents)
                 ) %>%
                 ggplot(aes(x = date, y = injuries_per_collision)) +
-                geom_line()
+                geom_line() +
+                labs(title="Persons Injured per Collision by Date",x="Date",y="Persons Injured per Collision")
         }
 
         if (plot_name == "plot_death_per_collision_2") {
@@ -188,7 +193,8 @@ get_plots_2 <- function(input, plot_name) {
                     ) / sum(total_accidents)
                 ) %>%
                 ggplot(aes(x = date, y = deaths_per_collision)) +
-                geom_line()
+                geom_line() +
+                labs(title="Persons Killed per Collision by Date",x="Date",y="Persons Killed per Collision")
         }
     }
 

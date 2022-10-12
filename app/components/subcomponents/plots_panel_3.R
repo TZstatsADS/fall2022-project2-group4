@@ -113,7 +113,8 @@ get_plots_3 <- function(input, plot_name) {
                 total_accidents = sum(total_accidents)
             ) %>%
             ggplot(aes(x = date, y = total_accidents)) +
-            geom_line()
+            geom_line() + 
+            labs(title="Total Number of Accidents by Date",x="Date",y="Number of Accidents")
     }
 
     if (plot_name == "plot_total_injuries_3") {
@@ -124,7 +125,8 @@ get_plots_3 <- function(input, plot_name) {
                 total_injured = sum(injured)
             ) %>%
             ggplot(aes(x = date, y = total_injured)) +
-            geom_line()
+            geom_line() +
+            labs(title="Total Persons Injured by Date",x="Date",y="Persons Injured") +
     }
 
     if (plot_name == "plot_total_deaths_3") {
@@ -135,7 +137,8 @@ get_plots_3 <- function(input, plot_name) {
                 total_killed = sum(killed)
             ) %>%
             ggplot(aes(x = date, y = total_killed)) +
-            geom_line()
+            geom_line() +
+            labs(title="Total Persons Killed by Date",x="Date",y="Persons Killed")
     }
 
     if (plot_name == "plot_injuries_per_collision_3") {
@@ -146,7 +149,8 @@ get_plots_3 <- function(input, plot_name) {
                 injuries_per_collision = sum(injured) / sum(total_accidents)
             ) %>%
             ggplot(aes(x = date, y = injuries_per_collision)) +
-            geom_line()
+            geom_line() +
+            labs(title="Persons Injured per Collision by Date",x="Date",y="Persons Injured per Collision")
     }
 
     if (plot_name == "plot_death_per_collision_3") {
@@ -157,7 +161,8 @@ get_plots_3 <- function(input, plot_name) {
                 deaths_per_collision = sum(killed) / sum(total_accidents)
             ) %>%
             ggplot(aes(x = date, y = deaths_per_collision)) +
-            geom_line()
+            geom_line() +
+            labs(title="Persons Killed per Collision by Date",x="Date",y="Persons Killed per Collision")
     }
     
 
