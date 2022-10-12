@@ -28,6 +28,9 @@ server <- function(input, output) {
     output$plot_total_deaths_2 <- renderPlot({
         get_plots_2(input, plot_name = "plot_total_deaths_2")
     })
+    output$plot_total_speed <- renderPlot({
+        get_plots_2(input, plot_name = "plot_total_speed")
+    })
     output$plot_injuries_per_collision_2 <- renderPlot({
         get_plots_2(input, plot_name = "plot_injuries_per_collision_2")
     })

@@ -51,6 +51,9 @@ plots_panel_2 <- tabPanel(
                 ),
                 plotOutput(
                     "plot_total_deaths_2"
+                ),
+                plotOutput(
+                    "plot_total_speed"
                 )
             )
         ),
@@ -104,8 +107,27 @@ get_plots_2 <- function(input, plot_name) {
             geom_line() +
             labs(title="Traffic Volume by Date",x="Date",y="Volume")
     }
+    else if (plot_name == "plot_total_speed") {
+        display_daily_speed <- daily_speed
 
-    else {
+        if (input$graphs_select_boroughs != "ALL") {
+            display_daily_speed <- display_daily_speed %>%
+                dplyr::filter(borough == input$graphs_select_boroughs)
+        }
+
+        display_daily_speed <- display_daily_speed %>%
+            select(date, avg_speed)
+
+        plot_result <- display_daily_speed %>%
+                group_by(date = lubridate::floor_date(date, "month")) %>%
+                summarise(
+                    avg_speed = mean(avg_speed)
+                ) %>%
+                ggplot(aes(x = date, y = avg_speed)) +
+                geom_line() +
+                labs(title="Average Traffic Speed Across Boroughs by Date",x="Date",y="Average Speed ")
+
+    } else {
 
         display_daily_crashes <- daily_crashes
         if (input$graphs_select_boroughs != "ALL") {
