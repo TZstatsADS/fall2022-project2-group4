@@ -6,3 +6,5 @@ output/Traffic_Speed_2019_onwards.zip
 output/Traffic_Volume_2019_onwards.csv
 data/*.csv
 rsconnect
+data/motor_vehicle_collisions_crashes.csv
+data/real-time_traffic_speed_data.csv
