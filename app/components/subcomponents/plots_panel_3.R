@@ -126,7 +126,7 @@ get_plots_3 <- function(input, plot_name) {
             ) %>%
             ggplot(aes(x = date, y = total_injured)) +
             geom_line() +
-            labs(title="Total Persons Injured by Date",x="Date",y="Persons Injured") +
+            labs(title="Total Persons Injured by Date",x="Date",y="Persons Injured")
     }
 
     if (plot_name == "plot_total_deaths_3") {
