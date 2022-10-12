@@ -3,7 +3,6 @@ import json
 import sodapy
 import os
 from typing import Dict, Iterable, Any
-import pandas as pd
 import csv
 from copy import deepcopy
 
@@ -62,7 +61,7 @@ def download_datasets(**kwargs) -> None:
             values["options"],
             **kwargs
         )
-        name = name.replace(" ", "_").lower()
+        name = "raw_" + name.replace(" ", "_").lower()
 
         filename: str = f"{name}.{content_type}"
         filepath: str = f"./data/{filename}"
