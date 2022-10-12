@@ -10,20 +10,9 @@ plots_panel_3 <- tabPanel(
     fluidRow(
         column(
             width = 3,
-            prettyRadioButtons(
-                inputId = "graphs_radio_vehicle_type",
-                label = "Vehicle type:",
-                choices = AFFECTED_PARTY,
-                inline = TRUE,
-                status = "danger",
-                fill = TRUE
-            )
-        ),
-        column(
-            width = 3,
             pickerInput(
-                inputId = "graphs_select_boroughs",
-                choices = BOROUGHS,
+                inputId = "graphs_select_vehicle_type",
+                choices = AFFECTED_PARTY,
                 selected = "ALL"
             )
         )
@@ -31,15 +20,8 @@ plots_panel_3 <- tabPanel(
     verticalLayout(
         fluid = TRUE,
         fluidRow(
-            splitLayout(
-                cellWidths = panel_width,
-                cellArgs = list(style = "padding: 6px"),
-                plotOutput(
-                    "plot_volume_3"
-                ),
-                plotOutput(
-                    "plot_no_collisions_3"
-                )
+            plotOutput(
+                "plot_no_collisions_3"
             )
         ),
         fluidRow(
@@ -69,74 +51,115 @@ plots_panel_3 <- tabPanel(
     )
 )
 
-plot_volume_3 <- daily_traffic %>%
-    select(date, total) %>%
-    group_by(date = lubridate::floor_date(date, "month")) %>%
-    summarise(volume = sum(total)) %>%
-    ggplot(aes(x = date, y = volume)) +
-    geom_line()
+get_plots_3 <- function(input, plot_name) {
 
-plot_no_collisions_3 <- daily_crashes %>%
-    select(date, total_accidents) %>%
-    group_by(date = lubridate::floor_date(date, "month")) %>%
-    summarise(
-        total_accidents = sum(total_accidents)
-    ) %>%
-    ggplot(aes(x = date, y = total_accidents)) +
-    geom_line()
+    display_daily_crashes <- daily_crashes
 
-plot_total_injuries_3 <- daily_crashes %>%
-    select(date, ends_with("injured")) %>%
-    group_by(date = lubridate::floor_date(date, "month")) %>%
-    summarise(
-        total_injured = sum(
-            number_of_persons_injured,
-            number_of_pedestrians_injured,
-            number_of_cyclist_injured,
-            number_of_motorist_injured
-        )
-    ) %>%
-    ggplot(aes(x = date, y = total_injured)) +
-    geom_line()
+    if (input$graphs_select_vehicle_type != "Cars") {
+        display_daily_crashes <- display_daily_crashes %>%
+            select(
+                date,
+                injured = number_of_persons_injured,
+                killed = number_of_persons_killed,
+                total_accidents
+            )
+    }
+    else if (input$graphs_select_vehicle_type != "Pedestrians") {
+        display_daily_crashes <- display_daily_crashes %>%
+            select(
+                date,
+                injured = number_of_pedestrians_injured,
+                killed = number_of_pedestrians_killed,
+                total_accidents
+            )
+    }
+    else if (input$graphs_select_vehicle_type != "Cyclist") {
+        display_daily_crashes <- display_daily_crashes %>%
+            select(
+                date,
+                injured = number_of_cyclist_injured,
+                killed = number_of_cyclist_killed,
+                total_accidents
+            )
+    }
+    else if (input$graphs_select_vehicle_type != "Motorists") {
+        display_daily_crashes <- display_daily_crashes %>%
+            select(
+                date,
+                injured = number_of_motorist_injured,
+                killed = number_of_motorist_killed,
+                total_accidents
+            )
+    } else{
+        display_daily_crashes <- display_daily_crashes %>%
+            mutate(
+                injured = number_of_persons_injured +
+                        number_of_pedestrians_injured +
+                        number_of_cyclist_injured +
+                        number_of_motorist_injured,
+                killed = number_of_persons_killed +
+                        number_of_pedestrians_killed +
+                        number_of_cyclist_killed +
+                        number_of_motorist_killed,
+            ) %>%
+            select(date, injured, killed, total_accidents)
+    }
 
-plot_total_deaths_3 <- daily_crashes %>%
-    select(date, ends_with("killed")) %>%
-    group_by(date = lubridate::floor_date(date, "month")) %>%
-    summarise(
-        total_killed = sum(
-            number_of_persons_killed,
-            number_of_pedestrians_killed,
-            number_of_cyclist_killed,
-            number_of_motorist_killed
-        )
-    ) %>%
-    ggplot(aes(x = date, y = total_killed)) +
-    geom_line()
+    if (plot_name == "plot_no_collisions_3") {
+        plot_result <- display_daily_crashes %>%
+            select(date, total_accidents) %>%
+            group_by(date = lubridate::floor_date(date, "month")) %>%
+            summarise(
+                total_accidents = sum(total_accidents)
+            ) %>%
+            ggplot(aes(x = date, y = total_accidents)) +
+            geom_line()
+    }
 
-plot_injuries_per_collision_3 <- daily_crashes %>%
-    select(date, ends_with("injured")) %>%
-    group_by(date = lubridate::floor_date(date, "month")) %>%
-    summarise(
-        injuries_per_collision = sum(
-            number_of_persons_injured,
-            number_of_pedestrians_injured,
-            number_of_cyclist_injured,
-            number_of_motorist_injured
-        ) / n()
-    ) %>%
-    ggplot(aes(x = date, y = injuries_per_collision)) +
-    geom_line()
+    if (plot_name == "plot_total_injuries_3") {
+        plot_result <- display_daily_crashes %>%
+            select(date, ends_with("injured")) %>%
+            group_by(date = lubridate::floor_date(date, "month")) %>%
+            summarise(
+                total_injured = sum(injured)
+            ) %>%
+            ggplot(aes(x = date, y = total_injured)) +
+            geom_line()
+    }
 
-plot_death_per_collision_3 <- daily_crashes %>%
-    select(date, ends_with("killed")) %>%
-    group_by(date = lubridate::floor_date(date, "month")) %>%
-    summarise(
-        deaths_per_collision = sum(
-            number_of_persons_killed,
-            number_of_pedestrians_killed,
-            number_of_cyclist_killed,
-            number_of_motorist_killed
-        ) / n()
-    ) %>%
-    ggplot(aes(x = date, y = deaths_per_collision)) +
-    geom_line()
+    if (plot_name == "plot_total_deaths_3") {
+        plot_result <- display_daily_crashes %>%
+            select(date, ends_with("killed")) %>%
+            group_by(date = lubridate::floor_date(date, "month")) %>%
+            summarise(
+                total_killed = sum(killed)
+            ) %>%
+            ggplot(aes(x = date, y = total_killed)) +
+            geom_line()
+    }
+
+    if (plot_name == "plot_injuries_per_collision_3") {
+        plot_result <- display_daily_crashes %>%
+            select(date, ends_with("injured"), total_accidents) %>%
+            group_by(date = lubridate::floor_date(date, "month")) %>%
+            summarise(
+                injuries_per_collision = sum(injured) / sum(total_accidents)
+            ) %>%
+            ggplot(aes(x = date, y = injuries_per_collision)) +
+            geom_line()
+    }
+
+    if (plot_name == "plot_death_per_collision_3") {
+        plot_result <- display_daily_crashes %>%
+            select(date, ends_with("killed"), total_accidents) %>%
+            group_by(date = lubridate::floor_date(date, "month")) %>%
+            summarise(
+                deaths_per_collision = sum(killed) / sum(total_accidents)
+            ) %>%
+            ggplot(aes(x = date, y = deaths_per_collision)) +
+            geom_line()
+    }
+    
+
+    return(plot_result)
+}
