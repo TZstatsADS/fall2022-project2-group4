@@ -1,10 +1,8 @@
-
-
 repository_url <- "https://github.com/TZstatsADS/fall2022-project2-group4/tree/master" # nolint
-source("./app/dependencies.R")
-source("./app/components/main_panel.R")
-source("./app/components/map_panel.R")
-source("./app/components/graphs_panel.R")
+source("./dependencies.R")
+source("./components/main_panel.R")
+source("./components/map_panel.R")
+source("./components/graphs_panel.R")
 
 ui <- fluidPage(
   theme = shinytheme("simplex"),
@@ -16,7 +14,7 @@ ui <- fluidPage(
     ),
     map_panel_ui,
     graphs_panel_ui,
-    main_panel_ui,
+    # main_panel_ui,
   ),
-  includeCSS("./app/css/panel_styles.css")
+  includeCSS("./css/panel_styles.css")
 )

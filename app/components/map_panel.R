@@ -1,5 +1,6 @@
-source("./app/dependencies.R")
-source("./app/definitions.R")
+source("./dependencies.R")
+source("./definitions.R")
+source("./datasets.R")
 
 # Map panel UI code
 
@@ -25,13 +26,14 @@ map_panel_ui <- tabPanel(
         tags$br(),
         pickerInput(
             inputId = "map_select_boroughs",
-            choices = BOROUGHS
+            choices = BOROUGHS,
+            selected = "ALL"
         ),
         fluidRow(
             column(
                 width = 2,
                 materialSwitch(
-                    inputId = "map_switch_killed.injured",
+                    inputId = "map_switch_killed_injured",
                     label = "",
                     status = "danger"
                 ),
@@ -44,7 +46,7 @@ map_panel_ui <- tabPanel(
             )
         ),
         prettyRadioButtons(
-            inputId = "radio_vehicle_type",
+            inputId = "map_radio_vehicle_type",
             label = "Vehicle type:",
             choices = AFFECTED_PARTY,
             inline = TRUE,
@@ -54,8 +56,8 @@ map_panel_ui <- tabPanel(
     ), # end of absolute panel panel
     absolutePanel(
         id = "map_time_control", class = "panel panel-default custom-panel",
-        fixed = FALSE,
-        top = 100, left = 1500,
+        fixed = FALSE, draggable = TRUE,
+        top = 100, left = 1000,
         right = "auto", bottom = "auto",
         width = 400, height = "auto",
         fluidRow(
@@ -64,13 +66,13 @@ map_panel_ui <- tabPanel(
                 sliderInput(
                     inputId = "map_slider_time",
                     label = "Time",
-                    value = 0,
-                    min = 0,
-                    max = 1000,
+                    value = min(daily_crashes$crash_date),
+                    min = min(daily_crashes$crash_date),
+                    max = max(daily_crashes$crash_date),
                     step = 1,
                     ticks = FALSE,
                     animate = animationOptions(
-                        interval = 333,
+                        interval = 300,
                         loop = FALSE,
                         playButton = NULL,
                         pauseButton = NULL
@@ -85,17 +87,15 @@ map_panel_ui <- tabPanel(
 
 # Map panel server code
 
-# TODO: define map data
-map_data <- NULL
-
+# TODO: REMOVE THIS
+# map_data <- null
 leaflet_map <- leaflet(
-    map_data,
-    height = panel_height,
-    options = leafletOptions(
-        minZoom = 11,
-        maxZoom = 13
-    )
-) %>%
+        height = panel_height,
+        options = leafletOptions(
+            minZoom = 11,
+            maxZoom = 13
+        )
+    ) %>%
     addTiles() %>%
     addProviderTiles(
         "CartoDB.Positron",
@@ -106,13 +106,115 @@ leaflet_map <- leaflet(
     setView(
         lng = -73.9834,
         lat = 40.7504,
-        zoom = 12
+        zoom = 10
+    ) 
+
+
+generate_map <- function(input) {
+    display_data <- daily_crashes %>%
+        dplyr::filter(
+            `date` <= max(
+                min(daily_crashes$date),
+                as.Date(input$map_slider_time)
+            )
+        )
+
+    if (input$map_select_boroughs != "ALL") {
+        display_data <- display_data %>%
+        dplyr::filter(
+            borough == input$map_select_boroughs
+        )
+    }
+
+    if (input$map_radio_vehicle_type == "Cars") {
+        display_data <- display_data %>%
+            select(
+                avg_lat, avg_lon,
+                number_of_persons_injured,
+                number_of_persons_killed
+            )
+    }
+    if (input$map_radio_vehicle_type == "Pedestrians") {
+        display_data <- display_data %>%
+            select(
+                avg_lat, avg_lon,
+                number_of_pedestrians_injured,
+                number_of_pedestrians_killed
+            )
+    }
+    if (input$map_radio_vehicle_type == "Cyclist") {
+        display_data <- display_data %>%
+            select(
+                avg_lat, avg_lon,
+                number_of_cyclist_injured,
+                number_of_cyclist_killed
+            )
+    }
+    if (input$map_radio_vehicle_type == "Motorist") {
+        display_data <- display_data %>%
+            select(
+                avg_lat, avg_lon,
+                number_of_motorist_injured,
+                number_of_motorist_killed
+            )
+    }
+    if (input$map_radio_vehicle_type == "All") {
+        display_data <- display_data %>%
+            mutate(
+                sum_injured = sum(c(
+                    number_of_persons_injured,
+                    number_of_pedestrians_injured,
+                    number_of_cyclist_injured,
+                    number_of_motorist_injured
+                )),
+                sum_killed = sum(c(
+                    number_of_persons_killed,
+                    number_of_pedestrians_killed,
+                    number_of_cyclist_killed,
+                    number_of_motorist_killed
+                )),
+            ) %>%
+            select(
+                avg_lat, avg_lon,
+                sum_injured,
+                sum_killed
+            )
+    }
+
+    killed_or_injured <- ifelse(
+        input$map_switch_killed_injured,
+        "killed",
+        "injured"
     )
+
+    max_value <- ifelse(
+        input$map_switch_killed_injured,
+        50,
+        100
+    )
+
+    display_data <- display_data %>%
+        select(avg_lat, avg_lon, value = ends_with(killed_or_injured))
+
+    # print(tail(display_data))
+    updated_map <- leaflet_map %>%
+        addHeatmap(
+            lng = display_data$avg_lon,
+            lat = display_data$avg_lat,
+            intensity = display_data$value,
+            max=max_value,
+            radius=25,
+            blur=10
+        )
+    return(updated_map)
+}
+
+
 
 map_borough_label <- function(input) {
     renderText({
         return(ifelse(
-            input$map_switch_killed.injured,
+            input$map_switch_killed_injured,
             "Killed",
             "Injured"
         ))

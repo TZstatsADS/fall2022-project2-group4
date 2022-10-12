@@ -1,4 +1,4 @@
-source("./app/dependencies.R")
+source("./dependencies.R")
 
 panel_name <- "Main"
 
