@@ -1,9 +1,8 @@
 ./.venv
 *.pyc
 .vscode/settings.json
-<<<<<<< HEAD
 app/shinyapps_io.R
-=======
 output/Traffic_Speed_2019_onwards.zip
 output/Traffic_Volume_2019_onwards.csv
->>>>>>> b2668d6b852a8ec6fcebf9d909eeccdb5cac4514
+data/*.csv
+rsconnect
