@@ -1,7 +1,10 @@
-DEPLOY <- F
+DEPLOY <- T
 if (!DEPLOY) {
 
-    setwd("./app")
+    if (basename(getwd()) != "app") {
+        setwd("./app")
+    }
+
     source("./dependencies.R")
     source("./server.R")
     source("./ui.R")
