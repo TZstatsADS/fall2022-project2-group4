@@ -66,9 +66,9 @@ map_panel_ui <- tabPanel(
                 sliderInput(
                     inputId = "map_slider_time",
                     label = "Time",
-                    value = min(daily_crashes$crash_date),
-                    min = min(daily_crashes$crash_date),
-                    max = max(daily_crashes$crash_date),
+                    value = min(daily_crashes$date),
+                    min = min(daily_crashes$date),
+                    max = max(daily_crashes$date),
                     step = 1,
                     ticks = FALSE,
                     animate = animationOptions(
