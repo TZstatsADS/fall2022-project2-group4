@@ -9,6 +9,40 @@ if (!exists("daily_speed")) {
 }
 if (!exists("daily_traffic")) {
     daily_traffic <- read_csv("./agg/Traffic_Volume_2019_onwards.csv")
+
+    manhattan_traffic_filter <- (
+        (daily_traffic$plaza_id == 21 & daily_traffic$direction == "I") |
+        (daily_traffic$plaza_id == 24 & daily_traffic$direction == "I") |
+        (daily_traffic$plaza_id == 27 & daily_traffic$direction == "I") |
+        (daily_traffic$plaza_id == 28 & daily_traffic$direction == "I")
+    )
+
+    queens_traffic_filter <- (
+        (daily_traffic$plaza_id == 21 & daily_traffic$direction == "I") |
+        (daily_traffic$plaza_id == 22 & daily_traffic$direction == "O") |
+        (daily_traffic$plaza_id == 23 & daily_traffic$direction == "O") |
+        (daily_traffic$plaza_id == 26 & daily_traffic$direction == "O") |
+        (daily_traffic$plaza_id == 27 & daily_traffic$direction == "O") |
+        (daily_traffic$plaza_id == 29 & daily_traffic$direction == "O")
+    )
+
+    brooklyn_traffic_filter <- (
+        (daily_traffic$plaza_id == 25 & daily_traffic$direction == "O") |
+        (daily_traffic$plaza_id == 28 & daily_traffic$direction == "O") |
+        (daily_traffic$plaza_id == 30 & daily_traffic$direction == "O")
+    )
+
+    bronx_traffic_filter <- (
+        (daily_traffic$plaza_id == 21 & daily_traffic$direction == "I") |
+        (daily_traffic$plaza_id == 22 & daily_traffic$direction == "O") |
+        (daily_traffic$plaza_id == 23 & daily_traffic$direction == "I") |
+        (daily_traffic$plaza_id == 24 & daily_traffic$direction == "O") |
+        (daily_traffic$plaza_id == 29 & daily_traffic$direction == "I")
+    )
+
+    staten_island_traffic_filter <- (
+        (daily_traffic$plaza_id == 30 & daily_traffic$direction == "I")
+    )
 }
 
 
@@ -74,5 +108,3 @@ if (!exists("daily_traffic")) {
 #     )
 # head(daily_speed)
 # dim(daily_speed)
-
-
