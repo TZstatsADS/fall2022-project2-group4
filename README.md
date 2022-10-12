@@ -4,7 +4,7 @@
 
 ![screenshot](doc/figs/map.jpg)
 
-In this second project of GR5243 Applied Data Science, we develop a *Exploratory Data Analysis and Visualization* shiny app on the work of a **NYC government agency/program** of your choice using NYC open data released on the [NYC Open Data By Agency](https://opendata.cityofnewyork.us/data/) website. In particular, many agencies have adjusted their work or rolled out new programs due to COVID, your app should provide ways for a user to explore quantiative measures of how covid has impacted daily life in NYC from different prospectives. See [Project 2 Description](doc/project2_desc.md) for more details.  
+In this second project of GR5243 Applied Data Science, we develop an *Exploratory Data Analysis and Visualization* shiny app on motor vehicle crash data collected by the **NYPD** released on [NYC Open Data](https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95). In particular, our project aims to analyze the effect of COVID-19 on the rate of traffic accidents and on the rate of severe accidents in NYC.  
 
 The **learning goals** for this project is:
 
@@ -14,24 +14,22 @@ The **learning goals** for this project is:
 - systems development/design life cycle
 - shiny app/shiny server
 
-*The above general statement about project 2 can be removed once you are finished with your project. It is optional.
-
-## Project Title Lorem ipsum dolor sit amet
+## NYC Vehicle Collision Analysis from 2019 to Present
 Term: Fall 2022
 
-+ Team #
-+ **Projec title**: + Team members
-	+ team member 1
-	+ team member 2
-	+ team member 3
-	+ team member 4
-	+ team member 5
++ Team #4
++ Team members:
+	+ Alix Leon
+	+ Kartik Kotian
+	+ Samira Kamal
+	+ Yizhou Zhao
+	+ Gabriel Spade
 
-+ **Project summary**: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
++ **Project summary**: This project aims to analyze the rate of motor vehicle crashes and their severity before, during, and after the COVID-19 lockdowns in New York City. To this end, we built a Shiny App in R using data collected by the NYPD available on NYC Open Data. Our findings demonstrate the relationship between traffic density and fatal accidents found in [Shefer and Rietveld, 1997](https://doi.org/10.1080/0042098975970).
 
-+ **Contribution statement**: ([default](doc/a_note_on_contributions.md)) All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
++ **Contribution statement**: The entire team selected the dataset and project topic. Alix Leon built the entire Shiny App and data pipeline. Kartik Kotian designed the overall data story structure, wrote the jupyter notebook analyses, and the presentation. Gabriel Spade organized and maintained the repository, updated the README files, added axes and titles to graphs for the App.
 
-Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by [RICH FITZJOHN](http://nicercode.github.io/about/#Team) (@richfitz). This folder is orgarnized as follows.
+This folder is organized as follows.
 
 ```
 proj/
@@ -39,8 +37,9 @@ proj/
 ├── lib/
 ├── data/
 ├── doc/
-└── output/
+├── output/
 ```
 
 Please see each subfolder for a README file.
 
+Note: global.R contains the code for running the Shiny App

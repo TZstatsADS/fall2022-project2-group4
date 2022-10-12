@@ -1,0 +1,40 @@
+socrata:
+  domain: "data.cityofnewyork.us"
+  app_token: efTrEYpkUUJVICmpP3u2Cew57
+  username: "jetrokiydo@vusra.com"
+  password: "5a$7?Np&46th5F97"
+  timeout: 60
+
+datasets:
+  motor_vehicle_collisions_crashes:
+    identifier: "h9gi-nx95"
+    content_type : "csv"
+    options:
+      select:
+        - "crash_date"
+        - "crash_time"
+        - "borough"
+        - "zip_code"
+        - "longitude"
+        - "latitude"
+        - "on_street_name"
+        - "number_of_persons_injured"
+        - "number_of_persons_killed"
+        - "number_of_pedestrians_injured"
+        - "number_of_pedestrians_killed"
+        - "number_of_cyclist_injured"
+        - "number_of_cyclist_killed"
+        - "number_of_motorist_injured"
+        - "number_of_motorist_killed"
+      where : "crash_date >= '2019-01-01'"
+  real-time_traffic_speed_data:
+    identifier: "i4gi-tjb9"
+    content_type: "csv"
+    options:
+      select:
+        - "speed"
+        - "travel_time"
+        - "data_as_of"
+        - "link_points"
+        - "borough"
+      where : "data_as_of >= '2019-01-01'"
