@@ -74,7 +74,7 @@ plot_volume_3 <- daily_traffic %>%
     group_by(date = lubridate::floor_date(date, "month")) %>%
     summarise(volume = sum(total)) %>%
     ggplot(aes(x = date, y = volume)) +
-    geom_line()
+    geom_line() + labs(title="Traffic Volume by Date",x="Date",y="Volume")
 
 plot_no_collisions_3 <- daily_crashes %>%
     select(date, total_accidents) %>%
@@ -83,7 +83,7 @@ plot_no_collisions_3 <- daily_crashes %>%
         total_accidents = sum(total_accidents)
     ) %>%
     ggplot(aes(x = date, y = total_accidents)) +
-    geom_line()
+    geom_line() + labs(title="Total Number of Accidents by Date",x="Date",y="Number of Accidents")
 
 plot_total_injuries_3 <- daily_crashes %>%
     select(date, ends_with("injured")) %>%
@@ -97,6 +97,7 @@ plot_total_injuries_3 <- daily_crashes %>%
         )
     ) %>%
     ggplot(aes(x = date, y = total_injured)) +
+    labs(title="Total Persons Injured by Date",x="Date",y="Persons Injured") +
     geom_line()
 
 plot_total_deaths_3 <- daily_crashes %>%
@@ -111,6 +112,7 @@ plot_total_deaths_3 <- daily_crashes %>%
         )
     ) %>%
     ggplot(aes(x = date, y = total_killed)) +
+    labs(title="Total Persons Killed by Date",x="Date",y="Persons Killed") +
     geom_line()
 
 plot_injuries_per_collision_3 <- daily_crashes %>%
@@ -125,6 +127,7 @@ plot_injuries_per_collision_3 <- daily_crashes %>%
         ) / n()
     ) %>%
     ggplot(aes(x = date, y = injuries_per_collision)) +
+    labs(title="Persons Injured per Collision by Date",x="Date",y="Persons Injured per Collision") +
     geom_line()
 
 plot_death_per_collision_3 <- daily_crashes %>%
@@ -139,4 +142,5 @@ plot_death_per_collision_3 <- daily_crashes %>%
         ) / n()
     ) %>%
     ggplot(aes(x = date, y = deaths_per_collision)) +
+    labs(title="Persons Killed per Collision by Date",x="Date",y="Persons Killed per Collision") +
     geom_line()

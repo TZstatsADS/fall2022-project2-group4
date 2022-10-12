@@ -53,7 +53,7 @@ plot_volume_1 <- daily_traffic %>%
     group_by(date = lubridate::floor_date(date, "month")) %>%
     summarise(volume = sum(total)) %>%
     ggplot(aes(x = date, y = volume)) +
-    geom_line()
+    geom_line() + labs(title="Traffic Volume by Date",x="Date",y="Volume")
 
 plot_no_collisions_1 <- daily_crashes %>%
     select(date, total_accidents) %>%
@@ -62,7 +62,7 @@ plot_no_collisions_1 <- daily_crashes %>%
         total_accidents = sum(total_accidents)
     ) %>%
     ggplot(aes(x = date, y = total_accidents)) +
-    geom_line()
+    geom_line() + labs(title="Total Number of Accidents by Date",x="Date",y="Number of Accidents")
 
 plot_total_injuries_1 <- daily_crashes %>%
     select(date, ends_with("injured")) %>%
@@ -76,7 +76,7 @@ plot_total_injuries_1 <- daily_crashes %>%
         )
     ) %>%
     ggplot(aes(x = date, y = total_injured)) +
-    geom_line()
+    geom_line() + labs(title="Total Persons Injured by Date",x="Date",y="Persons Injured")
 
 plot_total_deaths_1 <- daily_crashes %>%
     select(date, ends_with("killed")) %>%
@@ -90,7 +90,7 @@ plot_total_deaths_1 <- daily_crashes %>%
         )
     ) %>%
     ggplot(aes(x = date, y = total_killed)) +
-    geom_line()
+    geom_line() + labs(title="Total Persons Killed by Date",x="Date",y="Persons Killed")
 
 plot_injuries_per_collision_1 <- daily_crashes %>%
     select(date, ends_with("injured")) %>%
@@ -104,7 +104,7 @@ plot_injuries_per_collision_1 <- daily_crashes %>%
         ) / n()
     ) %>%
     ggplot(aes(x = date, y = injuries_per_collision)) +
-    geom_line()
+    geom_line() + labs(title="Persons Injured per Collision by Date",x="Date",y="Persons Injured per Collision")
 
 plot_death_per_collision_1 <- daily_crashes %>%
     select(date, ends_with("killed")) %>%
@@ -118,4 +118,4 @@ plot_death_per_collision_1 <- daily_crashes %>%
         ) / n()
     ) %>%
     ggplot(aes(x = date, y = deaths_per_collision)) +
-    geom_line()
+    geom_line() + labs(title="Persons Killed per Collision by Date",x="Date",y="Persons Killed per Collision")
