@@ -11,6 +11,8 @@ decorator==5.1.1
 entrypoints==0.4
 executing==1.1.0
 fonttools==4.37.4
+geographiclib==1.52
+geopy==2.2.0
 idna==3.4
 ipykernel==6.16.0
 ipython==8.5.0
