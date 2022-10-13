@@ -2,7 +2,7 @@
 
 ### [Project Description](doc/project2_desc.md)
 
-<img src="figs/GitHub.PNG" width="500">
+<img src="figs/GitHub.png" width="500">
 
 In this second project of GR5243 Applied Data Science, we develop an *Exploratory Data Analysis and Visualization* shiny app on motor vehicle crash data collected by the **NYPD** released on [NYC Open Data](https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95). In particular, our project aims to analyze the effect of COVID-19 on the rate of traffic accidents and on the rate of severe accidents in NYC.  
 
