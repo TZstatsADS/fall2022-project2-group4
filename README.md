@@ -27,7 +27,7 @@ Term: Fall 2022
 
 + **Project summary**: This project aims to analyze the rate of motor vehicle crashes and their severity before, during, and after the COVID-19 lockdowns in New York City. To this end, we built a Shiny App in R using data collected by the NYPD available on NYC Open Data. Our findings demonstrate the relationship between traffic density and fatal accidents found in [Shefer and Rietveld, 1997](https://doi.org/10.1080/0042098975970).
 
-+ **Contribution statement**: The entire team selected the dataset and project topic. Alix Leon built the entire Shiny App and data pipeline. Kartik Kotian designed the overall data story structure, wrote the jupyter notebook analyses, gathered research papers to support all claims and the presentation. Gabriel Spade organized and maintained the repository, updated the README files, added axes and titles to graphs for the App.
++ **Contribution statement**: "All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. "
 
 This folder is organized as follows.
 
